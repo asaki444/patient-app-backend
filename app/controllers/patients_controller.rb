@@ -8,7 +8,7 @@ class PatientsController < ApplicationController
       column = params[:type]
       text = "%#{params[:text]}%"
       @patient = Patient.where("#{column} LIKE ?", text)
-
+      puts @patient
    end
 
 end
