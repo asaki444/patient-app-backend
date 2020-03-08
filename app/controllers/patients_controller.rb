@@ -1,11 +1,14 @@
-
 class PatientsController < ApplicationController
 
    def index
        @patients = Patient.all
     end
 
-    def show(event_code, type)
-       @patient = Patient.find_by(event_code: event_code)
-    end
+    def show
+      column = params[:type]
+      text = "%#{params[:text]}%"
+      @patient = Patient.where("#{column} LIKE ?", text)
+
+   end
+
 end
