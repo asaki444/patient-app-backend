@@ -5,11 +5,9 @@ class PatientsController < ApplicationController
     end
 
     def show
-      non_empty_params = params.select do |param|
-         param === ""
-      end
-      puts non_empty_params.length
-      @patient = Patient.where("#{column} LIKE ?", text)
+      puts params
+      time = Time.strptime(params[:date], "%m/%d/%Y")
+      @patient = Patient.where.like(patient_name: "%#{params[:patient_name]}%", event_code: params[:event_code],date: time)
       puts @patient
    end
 
