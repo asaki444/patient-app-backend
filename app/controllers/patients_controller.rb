@@ -5,8 +5,10 @@ class PatientsController < ApplicationController
     end
 
     def show
-      column = params[:type]
-      text = "%#{params[:text]}%"
+      non_empty_params = params.select do |param|
+         param === ""
+      end
+      puts non_empty_params.length
       @patient = Patient.where("#{column} LIKE ?", text)
       puts @patient
    end
